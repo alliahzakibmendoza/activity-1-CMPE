@@ -3,13 +3,7 @@ from button import Button
 from settings import *
 from level import Level
 from intro import intro
-from battle_resistor import *
-from battle_transistor import *
-from battle_voltmeter import *
-from battle_potentiometer import *
-from battle_transformer import *
-from battle_rectifier_diode import *
-from battle_capacitor import *
+from battle import *
 
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("LEON ECE JOURNEY")
@@ -41,8 +35,8 @@ class Game:
             self.clock.tick(FPS)
 
 def play():
-        #intro()
-        battle_voltmeter()
+        intro()
+
         pygame.quit()
         game = Game()
         game.run()
@@ -77,7 +71,7 @@ def main_menu():
         for button in [PLAY_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

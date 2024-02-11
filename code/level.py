@@ -34,16 +34,16 @@ class Level:
 			'bridge': import_folder('../graphics/bridge')
 		}
 
-		for style,layout in layouts.items():
-			for row_index,row in enumerate(layout):
+		for style, layout in layouts.items():
+			for row_index, row in enumerate(layout):
 				for col_index, col in enumerate(row):
 					if col != '-1':
 						x = col_index * TILESIZE
 						y = row_index * TILESIZE
 						if style == 'Boundary':
-							Tile((x,y),[self.obstacle_sprites],'invisible')
-
-
+							Tile((x, y), (self.obstacle_sprites,), 'invisible')  # Convert to tuple
+						elif style in ['Entities', 'Object', 'Entities']:
+							Tile((x, y), (self.obstacle_sprites,), style.lower())  # Convert to tuple
 
 		self.player = Player((513,2693),[self.visible_sprites],self.obstacle_sprites)
 	def run(self):
@@ -55,7 +55,7 @@ class Level:
 class YSortCameraGroup(pygame.sprite.Group):
 	def __init__(self):
 
-		# general setup 
+		# general setup
 		super().__init__()
 		self.display_surface = pygame.display.get_surface()
 		self.half_width = self.display_surface.get_size()[0] // 2
@@ -65,10 +65,9 @@ class YSortCameraGroup(pygame.sprite.Group):
 		# creating the floor
 		self.floor_surf = pygame.image.load('../graphics/tilemap/Final map.png').convert()
 		self.floor_rect = self.floor_surf.get_rect(topleft = (0,0 ))
-
 	def custom_draw(self,player):
 
-		# getting the offset 
+		# getting the offset
 		self.offset.x = player.rect.centerx - self.half_width
 		self.offset.y = player.rect.centery - self.half_height
 
