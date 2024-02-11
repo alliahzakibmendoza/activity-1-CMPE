@@ -31,39 +31,32 @@ class Player(Entity):
 
 	def input(self):
 
-			keys = pygame.key.get_pressed()
+		keys = pygame.key.get_pressed()
+		# movement input
+		if keys[pygame.K_UP]:
+			self.direction.y = -1
+			self.status = 'up'
+		elif keys[pygame.K_DOWN]:
+			self.direction.y = 1
+			self.status = 'down'
+		else:
+			self.direction.y = 0
+			self.status = 'down_idle'
 
-			# movement input
-			if keys[pygame.K_UP]:
-				self.direction.y = -1
-				self.status = 'up'
-			elif keys[pygame.K_DOWN]:
-				self.direction.y = 1
-				self.status = 'down'
-			else:
-				self.direction.y = 0
-				self.status = 'down_idle'
-
-			if keys[pygame.K_RIGHT]:
-				self.direction.x = 1
-				self.status = 'right'
-			elif keys[pygame.K_LEFT]:
-				self.direction.x = -1
-				self.status = 'left'
-			else:
-				self.direction.x = 0
-
-
-
+		if keys[pygame.K_RIGHT]:
+			self.direction.x = 1
+			self.status = 'right'
+		elif keys[pygame.K_LEFT]:
+			self.direction.x = -1
+			self.status = 'left'
+		else:
+			self.direction.x = 0
 
 	def get_status(self):
-
 		# idle status
 		if self.direction.x == 0 and self.direction.y == 0:
 			if 'idle' in self.status:
 				self.status = self.status + '_idle'
-
-
 
 	def animate(self):
 		animation = self.animations[self.status]
