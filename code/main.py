@@ -3,7 +3,14 @@ from button import Button
 from settings import *
 from level import Level
 from intro import intro
-from battle import *
+from battle_capacitor import *
+from battle_potentiometer import *
+from battle_rectifier_diode import *
+from battle_resistor import *
+from battle_transformer import *
+from battle_transistor import *
+from battle_voltmeter import *
+
 
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("LEON ECE JOURNEY")
@@ -36,7 +43,7 @@ class Game:
 
 def play():
         intro()
-
+        battle_voltmeter()
         pygame.quit()
         game = Game()
         game.run()

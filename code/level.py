@@ -45,6 +45,31 @@ class Level:
 						elif style in ['Entities', 'Object', 'Entities']:
 							Tile((x, y), (self.obstacle_sprites,), style.lower())  # Convert to tuple
 
+						if style == 'object':
+							surf = graphics['objects'][int(col)]
+							Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+
+						if style == 'entities':
+							if col == '394':
+								self.player = Player(
+									(x,y),
+									[self.visible_sprites],
+									self.obstacle_sprites)
+							else:
+								if col == '390': monster_name = 'bamboo'
+								elif col == '391': monster_name = 'spirit'
+								elif col == '392': monster_name ='raccoon'
+								else: monster_name = 'squid'
+								Enemy(
+									monster_name,
+									(x,y),
+									[self.visible_sprites,self.obsctacle_sprites],
+									self.obstacle_sprites)
+
+
+
+
+
 		self.player = Player((513,2693),[self.visible_sprites],self.obstacle_sprites)
 	def run(self):
 		# update and draw the game
